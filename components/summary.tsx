@@ -9,9 +9,7 @@ import Button from "@/components/ui/button";
 import Currency from "@/components/ui/currency";
 import useCart from "@/hooks/use-cart";
 
-interface SummaryProps {}
-
-const Summary: React.FC<SummaryProps> = () => {
+const Summary = () => {
   const searchParams = useSearchParams();
   const items = useCart((state) => state.items);
   const removeAll = useCart((state) => state.removeAll);
@@ -35,9 +33,8 @@ const Summary: React.FC<SummaryProps> = () => {
       removeAll();
     }
 
-    if (searchParams.get("cancelled")) {
-      toast.success("Something went wrong.");
-      removeAll();
+    if (searchParams.get("canceled")) {
+      toast.error("Something went wrong.");
     }
   }, [searchParams, removeAll]);
 
