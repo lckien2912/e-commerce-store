@@ -6,8 +6,14 @@ import Button from "@/components/ui/button";
 import { ShoppingBag } from "lucide-react";
 import useCart from "@/hooks/use-cart";
 import { useRouter } from "next/navigation";
+import MobileNav from "@/components/mobile-nav";
+import { Category } from "@/types";
 
-const NavbarActions = () => {
+interface NavbarActionsProps {
+  data: Category[];
+}
+
+const NavbarActions: React.FC<NavbarActionsProps> = ({ data }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   const router = useRouter();
@@ -30,6 +36,7 @@ const NavbarActions = () => {
           {cart.items.length}
         </span>
       </Button>
+      <MobileNav data={data} />
     </div>
   );
 };
