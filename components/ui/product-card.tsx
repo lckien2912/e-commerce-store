@@ -37,7 +37,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
   return (
     <div
       onClick={handleClick}
-      className="bg-white group cursor-pointer rounded-xl border p-3 space-y-4 hover:shadow-lg hover:scale-105 transition"
+      className="bg-white group cursor-pointer rounded-xl border p-3 space-y-4 lg:hover:shadow-lg lg:hover:scale-105 transition shadow-md lg:shadow-none"
     >
       {/* Images and Actions */}
       <div className="aspect-square rounded-xl bg-gray-100 relative">
@@ -47,7 +47,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
           alt="Image"
           className="aspect-square object-cover rounded-md"
         />
-        <div className="opacity-0 group-hover:opacity-100 transition absolute w-full px-6 bottom-5">
+        <div className="opacity-0 group-hover:opacity-100 transition absolute w-full px-6 bottom-5 hidden md:block">
           <div className="flex gap-x-6 justify-center">
             <IconButton
               onClick={onPreview}
@@ -61,9 +61,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
         </div>
       </div>
       {/* Description */}
-      <div>
-        <p className="font-semibold text-lg">{data.name}</p>
-        <p className="text-sm text-gray-500">{data.category?.name}</p>
+      <div className="flex justify-between items-center">
+        <div>
+          <p className="font-semibold text-lg">{data.name}</p>
+          <p className="text-sm text-gray-500">{data.category?.name}</p>
+        </div>
+        <div className="flex gap-x-4 justify-center md:hidden">
+          <IconButton
+            onClick={onPreview}
+            icon={<Expand size={20} className="text-white" />}
+            className="bg-black"
+          />
+          <IconButton
+            onClick={onAddToCart}
+            icon={<ShoppingCart size={20} className="text-white" />}
+            className="bg-black"
+          />
+        </div>
       </div>
       {/* Price */}
       <div className="flex items-center justify-between">

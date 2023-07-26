@@ -3,12 +3,14 @@
 import { useEffect, useState } from "react";
 
 import { priceFormatter } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 interface CurrencyProps {
   value?: string | number;
+  className?: string;
 }
 
-const Currency: React.FC<CurrencyProps> = ({ value }) => {
+const Currency: React.FC<CurrencyProps> = ({ value, className }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -18,7 +20,9 @@ const Currency: React.FC<CurrencyProps> = ({ value }) => {
   if (!isMounted) return null;
 
   return (
-    <div className="font-semibold">{priceFormatter.format(Number(value))}</div>
+    <div className={(cn("font-semibold"), className)}>
+      {priceFormatter.format(Number(value))}
+    </div>
   );
 };
 
