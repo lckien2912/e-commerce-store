@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import { Plus, X } from "lucide-react";
-import { Dialog } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
 
 import { Size, Color } from "@/types";
 import Button from "@/components/ui/button";
@@ -26,25 +26,40 @@ const MobileFilters: React.FC<MobileFiltersProps> = ({ sizes, colors }) => {
         Filters
         <Plus size={20} />
       </Button>
-      <Dialog
-        open={open}
-        as="div"
-        onClose={onClose}
-        className="relative z-40 lg:hidden"
-      >
-        <div className="fixed inset-0 bg-black bg-opacity-25" />
-        <div className="fixed inset-0 z-40 flex">
-          <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-6 shadow-xl">
-            <div className="flex items-center justify-end px-4">
-              <IconButton icon={<X size={15} onClick={onClose} />} />
-            </div>
-            <div className="p-4">
-              <Filter valueKey="sizeId" name="Sizes" data={sizes} />
-              <Filter valueKey="colorId" name="Colors" data={colors} />
-            </div>
-          </Dialog.Panel>
-        </div>
-      </Dialog>
+      <Transition appear show={open} as={Fragment}>
+        <Dialog
+          open={open}
+          as="div"
+          onClose={onClose}
+          className="relative z-40 lg:hidden"
+        >
+          <div className="fixed inset-0 bg-black bg-opacity-25" />
+          <div className="fixed inset-0 z-40 flex">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 -right-[250px]"
+              enterTo="opacity-100 right-0"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-6 shadow-xl">
+                <div className="flex items-center justify-end px-4">
+                  <IconButton
+                    icon={<X size={15} onClick={onClose} />}
+                    className="hover:bg-red-500 hover:text-white"
+                  />
+                </div>
+                <div className="p-4">
+                  <Filter valueKey="sizeId" name="Sizes" data={sizes} />
+                  <Filter valueKey="colorId" name="Colors" data={colors} />
+                </div>
+              </Dialog.Panel>
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition>
     </>
   );
 };

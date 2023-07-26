@@ -43,7 +43,17 @@ const MobileNav: React.FC<MobileNavProps> = ({ data }) => {
           onClose={onClose}
           className="relative z-40 md:hidden"
         >
-          <div className="fixed inset-0 bg-black bg-opacity-25" />
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-25" />
+          </Transition.Child>
           <div className="fixed inset-0 z-40 flex">
             <Transition.Child
               as={Fragment}
@@ -51,12 +61,15 @@ const MobileNav: React.FC<MobileNavProps> = ({ data }) => {
               enterFrom="opacity-0 -right-[250px]"
               enterTo="opacity-100 right-0"
               leave="ease-in duration-200"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
+              leaveFrom="opacity-100 right-0"
+              leaveTo="opacity-0 -right-[250px]"
             >
               <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-[250px] flex-col overflow-y-auto bg-white py-4 pb-6 shadow-xl">
                 <div className="flex items-center justify-start px-4">
-                  <IconButton icon={<X size={15} onClick={onClose} />} />
+                  <IconButton
+                    icon={<X size={15} onClick={onClose} />}
+                    className="hover:bg-red-500 hover:text-white"
+                  />
                 </div>
                 <nav className="p-4">
                   <nav className="mx-6 flex flex-col justify-center items-end lg:space-x-6 gap-2">
