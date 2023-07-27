@@ -1,5 +1,6 @@
 import getProducts from "@/services/get-products";
-import getSizes from "@/services/get-sizes";
+import getCases from "@/services/get-cases";
+import getPlates from "@/services/get-plates";
 import getColors from "@/services/get-colors";
 import getCategory from "@/services/get-category";
 import Container from "@/components/ui/container";
@@ -17,7 +18,8 @@ interface CategoryPageProps {
   };
   searchParams: {
     colorId: string;
-    sizeId: string;
+    caseId: string;
+    plateId: string;
   };
 }
 
@@ -28,9 +30,11 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
   const products = await getProducts({
     categoryId: params.categoryId,
     colorId: searchParams.colorId,
-    sizeId: searchParams.sizeId,
+    caseId: searchParams.caseId,
+    plateId: searchParams.plateId,
   });
-  const sizes = await getSizes();
+  const cases = await getCases();
+  const plates = await getPlates();
   const colors = await getColors();
   const category = await getCategory(params.categoryId);
 
@@ -41,10 +45,11 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
         <div className="px-4 sm:px-6 lg:px-8 pb-24">
           <div className="lg:grid lg:grid-cols-5 lg:gap-x-8">
             {/* Mobile Filter */}
-            <MobileFilters sizes={sizes} colors={colors} />
+            <MobileFilters cases={cases} plates={plates} colors={colors} />
             {/* PC Filter */}
             <div className="hidden lg:block">
-              <Filter valueKey="sizeId" name="Sizes" data={sizes} />
+              <Filter valueKey="caseId" name="Cases" data={cases} />
+              <Filter valueKey="plateId" name="Plates" data={plates} />
               <Filter valueKey="colorId" name="Colors" data={colors} />
             </div>
             <div className="mt-6 lg:col-span-4 lg:mt-0">

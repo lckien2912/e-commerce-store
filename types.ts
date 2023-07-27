@@ -16,7 +16,8 @@ export interface Product {
   name: string;
   price: string;
   isFeatured: boolean;
-  size: Size;
+  case: Case;
+  plate: Plate;
   color: Color;
   images: Image[];
 }
@@ -26,10 +27,16 @@ export interface Image {
   url: string;
 }
 
-export interface Size {
+export interface Case {
   id: string;
   name: string;
-  value: string;
+  material: string;
+}
+
+export interface Plate {
+  id: string;
+  name: string;
+  material: string;
 }
 
 export interface Color {

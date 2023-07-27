@@ -4,17 +4,22 @@ import { useState, Fragment } from "react";
 import { Plus, X } from "lucide-react";
 import { Dialog, Transition } from "@headlessui/react";
 
-import { Size, Color } from "@/types";
+import { Color, Case, Plate } from "@/types";
 import Button from "@/components/ui/button";
 import IconButton from "@/components/ui/icon-button";
 import Filter from "./filter";
 
 interface MobileFiltersProps {
-  sizes: Size[];
+  cases: Case[];
+  plates: Plate[];
   colors: Color[];
 }
 
-const MobileFilters: React.FC<MobileFiltersProps> = ({ sizes, colors }) => {
+const MobileFilters: React.FC<MobileFiltersProps> = ({
+  cases,
+  plates,
+  colors,
+}) => {
   const [open, setOpen] = useState(false);
 
   const onOpen = () => setOpen(true);
@@ -52,7 +57,8 @@ const MobileFilters: React.FC<MobileFiltersProps> = ({ sizes, colors }) => {
                   />
                 </div>
                 <div className="p-4">
-                  <Filter valueKey="sizeId" name="Sizes" data={sizes} />
+                  <Filter valueKey="caseId" name="Cases" data={cases} />
+                  <Filter valueKey="plateId" name="Plates" data={plates} />
                   <Filter valueKey="colorId" name="Colors" data={colors} />
                 </div>
               </Dialog.Panel>

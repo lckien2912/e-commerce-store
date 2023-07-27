@@ -2,13 +2,13 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 
-import { Color, Size } from "@/types";
+import { Color, Case, Plate } from "@/types";
 import queryString from "query-string";
 import Button from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface FilterProps {
-  data: (Size | Color)[];
+  data: (Case | Plate | Color)[];
   name: string;
   valueKey: string;
 }
@@ -20,7 +20,6 @@ const Filter: React.FC<FilterProps> = ({ data, name, valueKey }) => {
   const selectedValue = searchParams.get(valueKey);
 
   const handleFilter = (id: string) => {
-    console.log(id);
     const current = queryString.parse(searchParams.toString());
 
     const query = {
