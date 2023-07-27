@@ -35,7 +35,7 @@ const MainNav: React.FC<MainNavProps> = ({ data }) => {
             key={href}
             href={href}
             className={cn(
-              "text-sm font-medium transition-colors hover:text-black",
+              "text-md font-medium transition-colors hover:text-black",
               active ? "text-black" : "text-neutral-500"
             )}
           >
